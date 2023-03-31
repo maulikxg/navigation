@@ -1,0 +1,1 @@
+var line={"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"coordinates":[[72.59549086624293,23.10660488680685],[72.59520198145125,23.10690806767201]],"type":"LineString"}}]} 

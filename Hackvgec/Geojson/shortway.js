@@ -1,0 +1,1 @@
+var shortway={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"color":"#FF0000"},"geometry":{"coordinates":[[72.59546344785127,23.10659716391426],[72.59518247866279,23.106915472186017],[72.59480899523138,23.106634982758493]],"type":"LineString"}}]}

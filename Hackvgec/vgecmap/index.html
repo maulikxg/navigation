@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGEC</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="crossorigin=""></script>
+    <script src="../Geojson/NEWBLOCK.js"></script>
+    <script src="line.js"></script>
+    <script src="../Geojson/longway.js"></script>
+    <script src="../Geojson/shortway.js"></script>
+    <script src="../vgecmap/campus/sitemap.png"></script>
+
+    <style>
+        #map { height: 600px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome To VGEC!</h1>
+    <div id="map"></div>
+</body>
+
+<script>
+    var map = L.map('map');
+    // map.setView([51.505, -0.09], 13);
+    // This is a geo coordinates of VGEC.
+    map.setView([23.1068, 72.5944], 18.45)
+    
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// var Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// 	subdomains: 'abcd',
+// 	minZoom: 1,
+// 	maxZoom: 16,
+// 	ext: 'jpg'
+// });
+
+// Watercolor.addTo(map)
+
+
+// // A BLOCK VGEC
+// var marker1 = L.marker([23.106482605019217, 72.5956024583168]).addTo(map);
+// marker1.bindPopup("<b>A BLOCK </b>").openPopup();
+// // B BLOCK VGEC
+// var marker2 = L.marker([23.106329648800244, 72.59515184718572]).addTo(map);
+// marker2.bindPopup("<b>B BLOCK </b>").openPopup();
+// // C BLOCK VGEC
+// var marker3 = L.marker([23.106679967624974, 72.59486485081055]).addTo(map);
+// marker3.bindPopup("<b>C BLOCK </b>").openPopup();
+// // D BLOCK VGEC
+// var marker4 = L.marker([23.106371588426, 72.59453762129867]).addTo(map);
+// marker4.bindPopup("<b>D BLOCK </b>").openPopup();
+// // E BLOCK VGEC
+// var marker5 = L.marker([23.10680825316316, 72.5943069513149]).addTo(map);
+// marker5.bindPopup("<b>E BLOCK </b>").openPopup();
+// // F BLOCK VGEC
+// var marker6 = L.marker([23.10700314826551, 72.59459394769006]).addTo(map);
+// marker6.bindPopup("<b>F BLOCK </b>").openPopup();
+// // G BLOCK VGEC
+// var marker7 = L.marker([23.107326328128234, 72.5943471844516]).addTo(map);
+// marker7.bindPopup("<b>G BLOCK </b>").openPopup();
+// // H BLOCK VGEC
+// var marker8 = L.marker([23.107198165379415, 72.59496473850234]).addTo(map);
+// marker8.bindPopup("<b>H BLOCK </b>").openPopup();
+// // POWER 
+// var marker9 = L.marker([23.107241100064545, 72.59423616275475]).addTo(map);
+// marker9.bindPopup("<b>POWER DEPT. </b>").openPopup();
+// // K BLOCK VGEC
+// var marker10 = L.marker([23.107190561640852, 72.59555717263588]).addTo(map);
+// marker10.bindPopup("<b>K BLOCK </b>").openPopup();
+// // OTHER G  
+// var marker11 = L.marker([23.1075169725485, 72.59529551279675  ]).addTo(map);
+// marker11.bindPopup("<b>J2 BLOCK </b>").openPopup();
+// // L BLOCK VGEC
+// var marker12 = L.marker([23.10692097331445, 72.5952955711082]).addTo(map);
+// marker12.bindPopup("<b>L BLOCK </b>").openPopup();
+
+// // USINNG ICONS WE CAN CREATE DIFF. ICONS FOR SHOWING THE BLOCKS.
+
+
+// L.Routing.control({
+//   waypoints: [
+//     L.latLng(23.106482605019217, 72.5956024583168),
+//     L.latLng(23.106329648800244, 72.59515184718572)
+//   ]
+// }).addTo(map);
+
+L.geoJSON(blocks,{
+    onEachFeature:  function(feature,layer){
+     layer.bindPopup(feature.properties.name)
+    }
+}).addTo(map);
+L.geoJSON(shortway,{
+    style:{
+        color:'#ff0000'
+    }
+}).bindPopup("This is short Way.").addTo(map);
+// L.geoJSON(line).addTo(map);
+// L.geoJSON(longway).addTo(map);
+// [23.0630,72.3530],[23.0618,72.3548]
+
+// var imageUrl = './campus/sitemap.png',
+//      imageBounds =[23.06,72.30];
+// L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+
+
+
+
+</script>
+</html>
